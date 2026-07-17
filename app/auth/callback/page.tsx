@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { supabase } from '@/lib/supabaseClient'
 
-export default function AuthCallback() {
+function AuthCallbackInner() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [message, setMessage] = useState('Logging you in...')
@@ -19,9 +19,8 @@ export default function AuthCallback() {
       }
 
       const userId = session.user.id
-      const userType = searchParams.get('type') // 'creator' or 'business'
+      const userType = searchParams.get('type')
 
-      // Check if this user already has a profile
       const { data: existingProfile } = await supabase
         .from('profiles')
         .select('id')
@@ -29,7 +28,6 @@ export default function AuthCallback() {
         .single()
 
       if (!existingProfile && userType) {
-        // First time logging in — create their profile row
         await supabase.from('profiles').insert({
           id: userId,
           user_type: userType,
@@ -52,5 +50,19 @@ export default function AuthCallback() {
     <main className="min-h-screen bg-influux-charcoal flex items-center justify-center">
       <p className="text-influux-offwhite/70">{message}</p>
     </main>
+  )
+}
+
+export default function AuthCallback() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-influux-charcoal flex items-center justify-center">
+          <p className="text-influux-offwhite/70">Loading...</p>
+        </main>
+      }
+    >
+      <AuthCallbackInner />
+    </Suspense>
   )
 }
