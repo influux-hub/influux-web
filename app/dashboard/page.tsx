@@ -208,14 +208,16 @@ function CreatorDashboard({ creatorScore }: { creatorScore: number }) {
 function BusinessDashboard() {
   return (
     <div className="grid sm:grid-cols-3 gap-5">
-      <FeatureCard
-        icon={<Rocket size={18} />}
-        title="Start a Campaign"
-        subtitle="Launch your first campaign"
-        accent="blue"
-        delay="0.1s"
-        primary
-      />
+      <Link href="/campaigns/new" className="sm:col-span-2">
+        <FeatureCard
+          icon={<Rocket size={18} />}
+          title="Start a Campaign"
+          subtitle="Launch your first campaign"
+          accent="blue"
+          delay="0.1s"
+          primary
+        />
+      </Link>
       <FeatureCard
         icon={<Users size={18} />}
         title="Matchmaker"
