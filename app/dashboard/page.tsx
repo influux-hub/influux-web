@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { supabase } from '@/lib/supabaseClient'
 import {
   Wallet,
@@ -190,15 +191,16 @@ function CreatorDashboard({ creatorScore }: { creatorScore: number }) {
         accent="blue"
         delay="0.3s"
       />
-      <div className="sm:col-span-2 animate-fade-in-up [animation-delay:0.4s]">
-        <div className="bg-gradient-to-r from-influux-blue/10 to-influux-green/10 border border-white/10 rounded-2xl p-5 flex items-center justify-between">
+
+      <Link href="/profile/edit" className="sm:col-span-2 animate-fade-in-up [animation-delay:0.4s]">
+        <div className="bg-gradient-to-r from-influux-blue/10 to-influux-green/10 border border-white/10 rounded-2xl p-5 flex items-center justify-between hover:border-influux-blue/30 transition cursor-pointer">
           <div>
             <p className="text-influux-offwhite font-medium text-sm">Your profile is looking a little empty</p>
             <p className="text-influux-offwhite/50 text-xs mt-0.5">Add your niche and social links to start getting matched.</p>
           </div>
           <ChevronRight size={18} className="text-influux-offwhite/40" />
         </div>
-      </div>
+      </Link>
     </div>
   )
 }
