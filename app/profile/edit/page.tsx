@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabaseClient'
-import { Instagram, Youtube, Twitter, Music2, ArrowLeft, Check } from 'lucide-react'
+import { Camera, Music2, Video, AtSign, ArrowLeft, Check } from 'lucide-react'
 
 const NICHES = [
   'Fashion & Beauty', 'Tech & Gadgets', 'Comedy & Entertainment',
@@ -139,7 +139,7 @@ export default function EditProfile() {
             </label>
             <div className="flex flex-col gap-3">
               <SocialInput
-                icon={<Instagram size={17} />}
+                icon={<Camera size={17} />}
                 placeholder="Instagram username or link"
                 value={socialLinks.instagram ?? ''}
                 onChange={(v) => updateLink('instagram', v)}
@@ -151,13 +151,13 @@ export default function EditProfile() {
                 onChange={(v) => updateLink('tiktok', v)}
               />
               <SocialInput
-                icon={<Youtube size={17} />}
+                icon={<Video size={17} />}
                 placeholder="YouTube channel link"
                 value={socialLinks.youtube ?? ''}
                 onChange={(v) => updateLink('youtube', v)}
               />
               <SocialInput
-                icon={<Twitter size={17} />}
+                icon={<AtSign size={17} />}
                 placeholder="X (Twitter) username or link"
                 value={socialLinks.twitter ?? ''}
                 onChange={(v) => updateLink('twitter', v)}
